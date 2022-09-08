@@ -9,9 +9,17 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject bulletPrefab;
 
+    float fireRateTimer;
+
     private void Update()
     {
+        fireRateTimer += Time.deltaTime;
         LookAtMouse();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot(bulletPrefab, 4, shootSpeed, bulletDistance, 1, 5);
+        }
     }
 
     void LookAtMouse()
@@ -22,11 +30,22 @@ public class PlayerShoot : MonoBehaviour
         transform.forward = lookAtPos - transform.position;
     }
 
-    void Shoot()
+    void Shoot(GameObject bulletPref, int bulletAmt, float bulletSpeed, float bulletLifeTime, float fireRate, float bulletSpread)
     {
-        GameObject bullet = Instantiate(bulletPrefab);
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        if (fireRateTimer < fireRate)
+        {
+            return;
+        }
+        for (int i = 0; i < bulletAmt; i++)
+        {
+            fireRateTimer = 0;
+            GameObject bullet = Instantiate(bulletPref, shootPoint);
+            bullet.transform.parent = null;
 
-        
+            Rigidbody bulletRb = bullet.AddComponent<Rigidbody>();
+            bulletRb.useGravity = false;
+            bulletRb.velocity = transform.forward * bulletSpeed + new Vector3(0, Random.Range(-bulletSpread, bulletSpread), 0);
+            Destroy(bullet, bulletLifeTime);
+        }
     }
 }
