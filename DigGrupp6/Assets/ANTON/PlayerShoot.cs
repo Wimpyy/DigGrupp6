@@ -16,11 +16,10 @@ public class PlayerShoot : MonoBehaviour
 
     void LookAtMouse()
     {
-        Vector3 mousePos = Input.mousePosition + new Vector3(0, 0, 1);
-        Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(mousePos);
-        mouseToWorld.z = transform.position.z;
-
-        transform.LookAt(mouseToWorld);
+        var lookAtPos = Input.mousePosition;
+        lookAtPos.z = transform.position.z - Camera.main.transform.position.z;
+        lookAtPos = Camera.main.ScreenToWorldPoint(lookAtPos);
+        transform.forward = lookAtPos - transform.position;
     }
 
     void Shoot()
