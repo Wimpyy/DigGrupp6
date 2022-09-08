@@ -16,9 +16,9 @@ public class PlayerShoot : MonoBehaviour
         fireRateTimer += Time.deltaTime;
         LookAtMouse();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            Shoot(bulletPrefab, 4, shootSpeed, bulletDistance, 1, 5);
+            Shoot(bulletPrefab, 1, shootSpeed, bulletDistance, .1f, 1f);
         }
     }
 
@@ -48,4 +48,5 @@ public class PlayerShoot : MonoBehaviour
             Destroy(bullet, bulletLifeTime);
         }
     }
+
 }
