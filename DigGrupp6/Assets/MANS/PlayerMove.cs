@@ -5,23 +5,28 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float walkSpeed;
+    public float crouchSpeed;
     public float jumpForce;
     public float earlyJumpDuration;
     public float accelerationTime;
     public float deAccelerationTime;
+    public float slideDeAccelerationTime;
+    public float slideDuration;
     public LayerMask groundLayer;
 
     private InputManager inputManager;
-    private Collider coll;
+    public Collider coll;
     private Rigidbody rb;
     private float earlyJumpTimer;
     private bool hasJumped = false;
+    private bool isSliding;
+    private float slidedTime;
+    private float slideDirection;
 
     void Start()
     {
         inputManager = GetComponent<InputManager>();
         rb = GetComponent<Rigidbody>();
-        coll = GetComponent<Collider>();
 
         inputManager.JumpEvent += TryJump;
     }
@@ -46,21 +51,61 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        Vector3 vel = rb.velocity;
-        vel.z = 0;
+        bool isInputingMovement = Mathf.Abs(inputManager.MovementValue.x) >= 0.1f;
 
-        if (inputManager.MovementValue.x != 0)
+        if ((inputManager.IsCrouching || (isSliding && slidedTime <= slideDuration)) && IsOnGround())
         {
-            //vel.x = inputManager.MovementValue.x * walkSpeed;
+            transform.localScale = new Vector3(1, 0.5f, 1);
 
-            vel.x = Mathf.Lerp(vel.x, walkSpeed * inputManager.MovementValue.x, accelerationTime * Time.deltaTime);
+            //Start slideing.
+            if (!isSliding && Mathf.Abs(rb.velocity.x) >= crouchSpeed) 
+            {
+                slideDirection = Mathf.Sign(inputManager.MovementValue.x);
+                isSliding = true;
+                slidedTime = 0;
+            }
+
+            if (isSliding && slidedTime <= slideDuration) //Slide
+            {
+                slidedTime += Time.deltaTime;
+                ChangeVelocity(walkSpeed * slideDirection, accelerationTime);
+            }
+            else //Crouch
+            {
+                if (isInputingMovement)
+                {
+                    ChangeVelocity(crouchSpeed * inputManager.MovementValue.x, accelerationTime);
+                }
+                else
+                {
+                    ChangeVelocity(0, deAccelerationTime);
+                }
+            }
         }
-        else
+        else//Walk
         {
-            vel.x -= vel.x * (deAccelerationTime + 1) * Time.deltaTime;
-        }
+            transform.localScale = new Vector3(1, 1, 1);
 
-        rb.velocity = vel;
+            slidedTime = 0;
+            isSliding = false;
+
+            if (isInputingMovement)
+            {
+                ChangeVelocity(walkSpeed * inputManager.MovementValue.x, accelerationTime);
+            }
+            else
+            {
+                ChangeVelocity(0, deAccelerationTime);
+            }
+        }
+    }
+
+    void ChangeVelocity(float newVelocity, float acc)
+    {
+        Vector3 velocity = rb.velocity;
+        velocity.z = 0;
+        velocity.x = Mathf.Lerp(velocity.x, newVelocity, acc * Time.deltaTime);
+        rb.velocity = velocity;
     }
 
     void TryJump()

@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour, Controls.IPlayerActions
 {
     public Vector2 MovementValue { get; private set; }
+    public bool IsCrouching { get; private set; }
+
     public event Action JumpEvent;
     public event Action ShootEvent;
     private Controls controls;
@@ -34,5 +36,17 @@ public class InputManager : MonoBehaviour, Controls.IPlayerActions
     public void OnShoot(InputAction.CallbackContext context)
     {
         ShootEvent?.Invoke();
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            IsCrouching = true;
+        }
+        else
+        {
+            IsCrouching = false;
+        }
     }
 }
