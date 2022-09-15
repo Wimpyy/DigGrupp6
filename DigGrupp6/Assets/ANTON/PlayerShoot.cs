@@ -9,7 +9,13 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject bulletPrefab;
 
+    GunClass gunClass;
     float fireRateTimer;
+
+    private void Start()
+    {
+        gunClass = FindObjectOfType<GunClass>();
+    }
 
     private void Update()
     {
@@ -18,7 +24,9 @@ public class PlayerShoot : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            Shoot(bulletPrefab, 1, shootSpeed, bulletDistance, .1f, 1f);
+            Shoot(gunClass.activeAmmo);
+            gunClass.activeAmmo.RemoveAmmo(gunClass.activeAmmo.bulletAmmount);
+            gunClass.RefreshUI();
         }
     }
 
@@ -30,22 +38,22 @@ public class PlayerShoot : MonoBehaviour
         transform.forward = lookAtPos - transform.position;
     }
 
-    void Shoot(GameObject bulletPref, int bulletAmt, float bulletSpeed, float bulletLifeTime, float fireRate, float bulletSpread)
+    void Shoot(AmmoTypeClass activeAmmo)
     {
-        if (fireRateTimer < fireRate)
+        if (fireRateTimer < activeAmmo.fireRate)
         {
             return;
         }
-        for (int i = 0; i < bulletAmt; i++)
+        for (int i = 0; i < activeAmmo.bulletAmmount; i++)
         {
             fireRateTimer = 0;
-            GameObject bullet = Instantiate(bulletPref, shootPoint);
+            GameObject bullet = Instantiate(activeAmmo.bulletPrefab, shootPoint);
             bullet.transform.parent = null;
 
             Rigidbody bulletRb = bullet.AddComponent<Rigidbody>();
             bulletRb.useGravity = false;
-            bulletRb.velocity = transform.forward * bulletSpeed + new Vector3(0, Random.Range(-bulletSpread, bulletSpread), 0);
-            Destroy(bullet, bulletLifeTime);
+            bulletRb.velocity = transform.forward * activeAmmo.bulletSpeed + new Vector3(0, Random.Range(-activeAmmo.bulletSpread, activeAmmo.bulletSpread), 0);
+            Destroy(bullet, activeAmmo.bulletLifeTime);
         }
     }
 
