@@ -13,6 +13,9 @@ public class PlayerMove : MonoBehaviour
     public float slideDeAccelerationTime;
     public float slideDuration;
     public LayerMask groundLayer;
+    public ParticleSystem slideParticle;
+    public ParticleSystem landParticle;
+    public Transform graphics;
 
     private InputManager inputManager;
     public Collider coll;
@@ -20,12 +23,15 @@ public class PlayerMove : MonoBehaviour
     private float earlyJumpTimer;
     private bool hasJumped = false;
     private bool isSliding;
+    private bool hasLanded;
     private float slidedTime;
     private float slideDirection;
+    private Vector3 graphicRotation;
 
     void Start()
     {
         inputManager = GetComponent<InputManager>();
+        graphicRotation = graphics.localEulerAngles;
         rb = GetComponent<Rigidbody>();
 
         inputManager.JumpEvent += TryJump;
@@ -41,6 +47,16 @@ public class PlayerMove : MonoBehaviour
             DoJump();
         }
 
+        if (IsOnGround() && !hasLanded)
+        {
+            landParticle.Play();
+            hasLanded = true;
+        }
+        else if(!IsOnGround())
+        {
+            hasLanded = false;
+        }
+
         Move();
     }
 
@@ -53,6 +69,11 @@ public class PlayerMove : MonoBehaviour
     {
         bool isInputingMovement = Mathf.Abs(inputManager.MovementValue.x) >= 0.1f;
 
+        if (isInputingMovement)
+        {
+            graphics.localEulerAngles = new Vector3(graphicRotation.x, graphicRotation.y + (90 * (Mathf.Sign(inputManager.MovementValue.x) + 1)), graphicRotation.z);
+        }
+
         if ((inputManager.IsCrouching || (isSliding && slidedTime <= slideDuration)) && IsOnGround())
         {
             transform.localScale = new Vector3(1, 0.5f, 1);
@@ -63,6 +84,7 @@ public class PlayerMove : MonoBehaviour
                 slideDirection = Mathf.Sign(inputManager.MovementValue.x);
                 isSliding = true;
                 slidedTime = 0;
+                slideParticle.Play();
             }
 
             if (isSliding && slidedTime <= slideDuration) //Slide
@@ -72,6 +94,8 @@ public class PlayerMove : MonoBehaviour
             }
             else //Crouch
             {
+                slideParticle.Stop();
+
                 if (isInputingMovement)
                 {
                     ChangeVelocity(crouchSpeed * inputManager.MovementValue.x, accelerationTime);
@@ -84,10 +108,13 @@ public class PlayerMove : MonoBehaviour
         }
         else//Walk
         {
+            slideParticle.Stop();
+
             transform.localScale = new Vector3(1, 1, 1);
 
             slidedTime = 0;
             isSliding = false;
+            
 
             if (isInputingMovement)
             {
