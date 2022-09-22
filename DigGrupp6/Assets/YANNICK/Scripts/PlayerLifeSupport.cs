@@ -23,19 +23,26 @@ public class PlayerLifeSupport : MonoBehaviour
     [SerializeField, Range(0, 200)] float heartSpreadement;
     [SerializeField, Range(0, 200)] float shieldSpreadement;
 
-    [SerializeField] Image[] heartImageArray;
+    [SerializeField] Sprite[] heartImageArray;
 
     public bool ifHearts = false;
     public bool ifBar = true;
+
+    //test
+    int[] heartValueIndex;
 
     void Start()
     {
         if (ifHearts)
         {
+            heartValueIndex = new int[heartsArray.Length];
+
             for (int i = 0; i < heartsArray.Length; i++)
             {
                 heartsArray[i] = Instantiate(heart, heartsPos.transform.position, heartsPos.rotation, healthCanvas.transform);
                 heartsArray[i].transform.localPosition = new Vector3(heartsPos.transform.localPosition.x + (i * heartSpreadement), heartsPos.transform.localPosition.y, 0);
+                heartsArray[i].GetComponent<Image>().sprite = heartImageArray[0];
+                heartValueIndex[i] = 2;
             }
 
             for (int i = 0; i < shieldArray.Length; i++)
@@ -57,6 +64,11 @@ public class PlayerLifeSupport : MonoBehaviour
         {
             PlayerDeath();
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(1);
+        }
     }
 
     public void TakeDamage(float damageToTake)
@@ -74,7 +86,14 @@ public class PlayerLifeSupport : MonoBehaviour
         }
         else if (ifHearts)
         {
-
+            for (int i = heartValueIndex.Length; i > 0; i--)
+            {
+                if (heartValueIndex[i] > 0)
+                {
+                    heartValueIndex[i]--;
+                    break;
+                }
+            }
         }
     }
 
