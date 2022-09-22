@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new GunClass", menuName = "Scriptable Objects/GunClass")]
 public class AmmoTypeClass : ScriptableObject
 {
+    [SerializeField] string AmmoName;
     public int ammoAmmount;
     public Sprite ammoSprite;
 

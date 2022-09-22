@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 334060649}
   - component: {fileID: 334060650}
   - component: {fileID: 334060651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunHolder
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
@@ -487,7 +487,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f4af8daffa00ec4aa35d3e8c585a8cb, type: 2}
   - {fileID: 11400000, guid: 52dbb801df8975844a8f19131bc85dbc, type: 2}
   ammoSlotHolder: {fileID: 1848927734}
-  ammoSlotCursor: {fileID: 0}
+  ammoSlotCursor: {fileID: 1996761663}
   activeAmmo: {fileID: 0}
 --- !u!1001 &569769521
 PrefabInstance:
@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 668179204}
   - component: {fileID: 668179203}
   - component: {fileID: 668179202}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -967,7 +967,7 @@ GameObject:
   - component: {fileID: 1401082674}
   - component: {fileID: 1401082673}
   - component: {fileID: 1401082672}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1066,7 +1066,7 @@ GameObject:
   - component: {fileID: 1437697415}
   - component: {fileID: 1437697414}
   - component: {fileID: 1437697413}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1259,7 +1259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800740768}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1422,7 +1422,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1996761665
 MonoBehaviour:
@@ -1437,15 +1437,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 0, g: 0.6114538, b: 1, a: 0.88235295}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

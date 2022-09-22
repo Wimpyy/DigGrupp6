@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc825a171c3c5642aa05f9a6b74f273, type: 3}
   m_Name: ammotry4
   m_EditorClassIdentifier: 
-  ammoAmmount: 6
+  AmmoName: Machine Gun
+  ammoAmmount: 99895
   ammoSprite: {fileID: 0}
   bulletPrefab: {fileID: 5675527454140333540, guid: 5cf9b178005c0684f8c40403301f0e78,
     type: 3}
   bulletAmmount: 1
-  bulletSpeed: 4
-  bulletLifeTime: 5
-  fireRate: 8
-  bulletSpread: 9
+  bulletSpeed: 30
+  bulletLifeTime: 2
+  fireRate: 0.1
+  bulletSpread: 3

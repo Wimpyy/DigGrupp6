@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc825a171c3c5642aa05f9a6b74f273, type: 3}
   m_Name: ammotest2
   m_EditorClassIdentifier: 
-  ammoAmmount: 4
+  AmmoName: Sniper
+  ammoAmmount: 99869
   ammoSprite: {fileID: 0}
-  bulletPrefab: {fileID: 5675527454140333540, guid: 5cf9b178005c0684f8c40403301f0e78,
+  bulletPrefab: {fileID: 5675527454140333540, guid: 1a1ba9d92e14c1b4d90e6c38354534f9,
     type: 3}
-  bulletAmmount: 6
-  bulletSpeed: 5
-  bulletLifeTime: 3
-  fireRate: 2
-  bulletSpread: 8
+  bulletAmmount: 1
+  bulletSpeed: 50
+  bulletLifeTime: 1
+  fireRate: 1
+  bulletSpread: 0
