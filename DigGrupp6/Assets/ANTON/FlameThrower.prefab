@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4513719274969285673}
   - component: {fileID: 3765093404432930118}
   - component: {fileID: 7239787080827482839}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: FlameThrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
