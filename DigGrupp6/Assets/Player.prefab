@@ -9638,7 +9638,7 @@ GameObject:
   - component: {fileID: 7674614574422370370}
   m_Layer: 7
   m_Name: Graphic
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9738,7 +9738,7 @@ GameObject:
   - component: {fileID: 7674614574123554192}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
