@@ -4,7 +4,6 @@ using System.Data.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class PlayerLifeSupport : MonoBehaviour
 {
     [SerializeField] float maxHealth = 100f;
@@ -29,7 +28,7 @@ public class PlayerLifeSupport : MonoBehaviour
     public bool ifBar = true;
 
     //test
-    int[] heartValueIndex;
+    [SerializeField] int[] heartValueIndex;
 
     void Start()
     {
@@ -42,7 +41,7 @@ public class PlayerLifeSupport : MonoBehaviour
                 heartsArray[i] = Instantiate(heart, heartsPos.transform.position, heartsPos.rotation, healthCanvas.transform);
                 heartsArray[i].transform.localPosition = new Vector3(heartsPos.transform.localPosition.x + (i * heartSpreadement), heartsPos.transform.localPosition.y, 0);
                 heartsArray[i].GetComponent<Image>().sprite = heartImageArray[0];
-                heartValueIndex[i] = 2;
+                heartValueIndex[i] = 1;
             }
 
             for (int i = 0; i < shieldArray.Length; i++)
@@ -86,11 +85,37 @@ public class PlayerLifeSupport : MonoBehaviour
         }
         else if (ifHearts)
         {
-            for (int i = heartValueIndex.Length; i > 0; i--)
+            for (int i = heartValueIndex.Length-1; i >= 0; i--)
             {
-                if (heartValueIndex[i] > 0)
+                if (heartValueIndex[i] >= 0)
                 {
                     heartValueIndex[i]--;
+                    if (heartValueIndex[2] == 0)
+                    {
+                        heartsArray[2].GetComponent<Image>().sprite = heartImageArray[1];
+                    }
+                    else if (heartValueIndex[2] == -1)
+                    {
+                        heartsArray[2].GetComponent<Image>().sprite = heartImageArray[2];
+                    }
+
+                    if (heartValueIndex[1] == 0)
+                    {
+                        heartsArray[1].GetComponent<Image>().sprite = heartImageArray[1];
+                    }
+                    else if (heartValueIndex[1] == -1)
+                    {
+                        heartsArray[1].GetComponent<Image>().sprite = heartImageArray[2];
+                    }
+
+                    if (heartValueIndex[0] == 0)
+                    {
+                        heartsArray[0].GetComponent<Image>().sprite = heartImageArray[1];
+                    }
+                    else if (heartValueIndex[0] == -1)
+                    {
+                        heartsArray[0].GetComponent<Image>().sprite = heartImageArray[2];
+                    }
                     break;
                 }
             }
@@ -117,7 +142,10 @@ public class PlayerLifeSupport : MonoBehaviour
         }
         else if (ifHearts)
         {
+            if (true)
+            {
 
+            }
         }
     }
 

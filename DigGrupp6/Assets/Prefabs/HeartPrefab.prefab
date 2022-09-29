@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5341687347543506305}
   - component: {fileID: 6208389508296290027}
   m_Layer: 0
-  m_Name: PlaceHolderHeart
+  m_Name: HeartPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
