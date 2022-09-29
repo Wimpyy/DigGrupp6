@@ -47,24 +47,27 @@ public class PlayerShoot : MonoBehaviour
         }
         for (int i = 0; i < activeAmmo.bulletAmmount; i++)
         {
-            gunClass.activeAmmo.RemoveAmmo(1);
-            fireRateTimer = 0;
-            GameObject bullet = Instantiate(activeAmmo.bulletPrefab, shootPoint.transform.position, Quaternion.identity);
-            bullet.transform.parent = null;
+            if (activeAmmo.ammoAmmount > 0)
+            {
+                gunClass.activeAmmo.RemoveAmmo(1);
+                fireRateTimer = 0;
+                GameObject bullet = Instantiate(activeAmmo.bulletPrefab, shootPoint.transform.position, Quaternion.identity);
+                bullet.transform.parent = null;
 
-            Rigidbody bulletRb = bullet.AddComponent<Rigidbody>();
-            bulletRb.useGravity = false;
-
-
-            Vector3 bulletDir = Vector3.Project(new Vector3(0, Random.Range(-activeAmmo.bulletSpread, activeAmmo.bulletSpread), 0), transform.right);
-            bulletRb.velocity = transform.forward * activeAmmo.bulletSpeed + bulletDir;
+                Rigidbody bulletRb = bullet.AddComponent<Rigidbody>();
+                bulletRb.useGravity = false;
 
 
-            Vector3 vel = bulletRb.velocity;
+                Vector3 bulletDir = Vector3.Project(new Vector3(0, Random.Range(-activeAmmo.bulletSpread, activeAmmo.bulletSpread), 0), transform.right);
+                bulletRb.velocity = transform.forward * activeAmmo.bulletSpeed + bulletDir;
 
-            bullet.transform.rotation = Quaternion.LookRotation(vel);
 
-            Destroy(bullet, activeAmmo.bulletLifeTime);
+                Vector3 vel = bulletRb.velocity;
+
+                bullet.transform.rotation = Quaternion.LookRotation(vel);
+
+                Destroy(bullet, activeAmmo.bulletLifeTime);
+            }
         }
     }
 

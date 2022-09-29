@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: AmmoTest1
   m_EditorClassIdentifier: 
   AmmoName: FlameThrower
-  ammoAmmount: 999787080
+  ammoAmmount: 2
   ammoSprite: {fileID: 0}
   bulletPrefab: {fileID: 5675527454140333540, guid: 4468a16aefd8fb74d81073cd816129a8,
     type: 3}
   bulletAmmount: 20
-  bulletSpeed: 30
-  bulletLifeTime: 1
-  fireRate: 0.0025
+  bulletSpeed: 20
+  bulletLifeTime: 0.2
+  fireRate: 0.005
   bulletSpread: 10

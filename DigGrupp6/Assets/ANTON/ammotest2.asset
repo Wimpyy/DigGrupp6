@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ammotest2
   m_EditorClassIdentifier: 
   AmmoName: Sniper
-  ammoAmmount: 99869
+  ammoAmmount: 10
   ammoSprite: {fileID: 0}
   bulletPrefab: {fileID: 5675527454140333540, guid: 1a1ba9d92e14c1b4d90e6c38354534f9,
     type: 3}
