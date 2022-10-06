@@ -34,6 +34,26 @@ public class GunClass : MonoBehaviour
     private void Update()
     {
         HotbarInputs();
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            activeSlotIndex = activeSlotIndex + 1;
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            activeSlotIndex = activeSlotIndex - 1;
+        }
+
+        //Check if above limit
+        if (activeSlotIndex > ammoSlots.Length - 1)
+        {
+            activeSlotIndex = 0;
+        }
+        if (activeSlotIndex < 0)
+        {
+            activeSlotIndex = ammoSlots.Length - 1;
+        }
+
         activeAmmo = ammoTypes[activeSlotIndex];
         ammoSlotCursor.transform.position = ammoSlots[activeSlotIndex].transform.position;
 
