@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum GunType
+{
+    flameThrower,
+    sniper,
+    shotGun,
+    machineGun
+}
+
 [CreateAssetMenu(fileName = "new GunClass", menuName = "Scriptable Objects/GunClass")]
 public class AmmoTypeClass : ScriptableObject
 {
     [SerializeField] string AmmoName;
+    //public GunType gunType;
     public int ammoAmmount;
     public Sprite ammoSprite;
 
