@@ -24,6 +24,8 @@ public class PlayerLifeSupport : MonoBehaviour
 
     [SerializeField] Sprite[] heartImageArray;
 
+    [SerializeField] AnimationClip takeDamageHeartAnim;
+
     public bool ifHearts = false;
     public bool ifBar = true;
 
@@ -115,7 +117,9 @@ public class PlayerLifeSupport : MonoBehaviour
                     else if (heartValueIndex[0] == -1)
                     {
                         heartsArray[0].GetComponent<Image>().sprite = heartImageArray[2];
+                        PlayerDeath();
                     }
+                    StartCoroutine(Throb(heartsArray[i].gameObject));
                     break;
                 }
             }
@@ -151,6 +155,27 @@ public class PlayerLifeSupport : MonoBehaviour
 
     public void PlayerDeath()
     {
-        // Play the death animation, die, respawn at the last checkpoint
+        // Play the death animation, die, respawn at the last checkpoint with full hp
+    }
+
+    public void PlayerSpawn()
+    {
+        //Reset all hearts and values that should be renewed.
+    }
+
+    IEnumerator Throb(GameObject currentHeart)
+    {
+        //for (int i = 2; i <= heartsArray.Length && i > -1; i--)
+        //{
+        //    heartsArray[i] = currentHeart;
+        //    break;
+        //}
+        currentHeart.GetComponent<Image>().color = Color.red;
+        currentHeart.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", true);
+
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        currentHeart.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", false);
+        currentHeart.GetComponent<Image>().color = Color.white;
     }
 }
