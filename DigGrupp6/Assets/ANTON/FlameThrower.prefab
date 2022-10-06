@@ -61,7 +61,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderer: {fileID: 1146357937247032653}
   ammo: {fileID: 11400000, guid: 11993060354e43c4c9f811e7b6a2fc46, type: 2}
-  endColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0.6666667}
+  endSize: {x: 2, y: 2, z: 2}
+  colorFade: 0.1
+  sizeFade: 0.1
+  endColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0.49803922}
 --- !u!1 &6412605713312906609
 GameObject:
   m_ObjectHideFlags: 0

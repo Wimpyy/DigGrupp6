@@ -6,12 +6,12 @@ public class FlameThrowerManager : MonoBehaviour
 {
     [SerializeField] Renderer renderer;
     [SerializeField] AmmoTypeClass ammo;
+    [SerializeField] Vector3 endSize;
+    [SerializeField] float colorFade, sizeFade;
     [SerializeField] Color endColor;
-    private float t;
 
     private void Start()
     {
-        t = 0;
         Vector3 awayDirection = transform.position - Camera.main.transform.position;
         Quaternion awayRotation = Quaternion.LookRotation(awayDirection);
 
@@ -20,8 +20,10 @@ public class FlameThrowerManager : MonoBehaviour
 
     private void Update()
     {
-        t += Time.deltaTime / ammo.bulletLifeTime;
-        renderer.material.color = Color.Lerp(renderer.material.color, endColor,t);
+        Material mat = new Material(renderer.material);
+        renderer.material = mat;
+        renderer.material.color = Color.Lerp(mat.color, endColor, colorFade);
+        transform.localScale = Vector3.Lerp(transform.localScale, endSize, sizeFade);
 
     }
 
