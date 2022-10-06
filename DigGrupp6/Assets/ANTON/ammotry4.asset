@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ammotry4
   m_EditorClassIdentifier: 
   AmmoName: Machine Gun
-  ammoAmmount: 10
+  ammoAmmount: 9888
   ammoSprite: {fileID: 0}
   bulletPrefab: {fileID: 5675527454140333540, guid: 5cf9b178005c0684f8c40403301f0e78,
     type: 3}

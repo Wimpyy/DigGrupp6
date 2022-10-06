@@ -57,14 +57,14 @@ public class PlayerShoot : MonoBehaviour
                 Rigidbody bulletRb = bullet.AddComponent<Rigidbody>();
                 bulletRb.useGravity = false;
 
-
-                Vector3 bulletDir = Vector3.Project(new Vector3(0, Random.Range(-activeAmmo.bulletSpread, activeAmmo.bulletSpread), 0), transform.right);
+                Vector3 bulletDir = new Vector3(0, Random.Range(-activeAmmo.bulletSpread, activeAmmo.bulletSpread), 0);
                 bulletRb.velocity = transform.forward * activeAmmo.bulletSpeed + bulletDir;
 
 
                 Vector3 vel = bulletRb.velocity;
 
                 bullet.transform.rotation = Quaternion.LookRotation(vel);
+                bulletRb.constraints = RigidbodyConstraints.FreezeRotation;
 
                 Destroy(bullet, activeAmmo.bulletLifeTime);
             }
