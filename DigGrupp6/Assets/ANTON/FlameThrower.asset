@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fc825a171c3c5642aa05f9a6b74f273, type: 3}
-  m_Name: ammotry4
+  m_Name: FlameThrower
   m_EditorClassIdentifier: 
-  AmmoName: Machine Gun
-  ammoAmmount: 9888
+  AmmoName: FlameThrower
+  ammoAmmount: 194146
   ammoSprite: {fileID: 0}
-  bulletPrefab: {fileID: 5675527454140333540, guid: 5cf9b178005c0684f8c40403301f0e78,
+  bulletPrefab: {fileID: 5675527454140333540, guid: 4468a16aefd8fb74d81073cd816129a8,
     type: 3}
   bulletAmmount: 1
-  bulletSpeed: 30
-  bulletLifeTime: 2
-  fireRate: 0.1
+  bulletSpeed: 22.18
+  bulletLifeTime: 0.5
+  fireRate: 0.001
   bulletSpread: 3
