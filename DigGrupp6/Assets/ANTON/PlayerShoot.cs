@@ -2,20 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] float shootSpeed;
-    [SerializeField] float bulletDistance;
+    [SerializeField] CinemachineVirtualCamera cam;
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float sniperChargeTime;
+    [SerializeField] float sniperFovAdd;
 
     GunClass gunClass;
     float fireRateTimer;
+    float sniperCharge = 0;
+
+    float baseFov;
+    bool cd = false;
+
 
     private void Start()
     {
         gunClass = FindObjectOfType<GunClass>();
+
+        baseFov = cam.m_Lens.FieldOfView;
     }
 
     private void Update()
@@ -23,7 +32,41 @@ public class PlayerShoot : MonoBehaviour
         fireRateTimer += Time.deltaTime;
         LookAtMouse();
 
-        if (Input.GetMouseButton(0))
+        if (gunClass.activeAmmo.gunType == GunType.sniper)
+        {
+
+            if (Input.GetMouseButton(0) && !cd)
+            {
+                if (sniperCharge < sniperChargeTime)
+                {
+                    sniperCharge += Time.deltaTime;
+                }
+
+            }
+            if (Input.GetMouseButtonUp(0) && sniperCharge >= sniperChargeTime - .3f)
+            {
+                Shoot(gunClass.activeAmmo);
+                gunClass.RefreshUI();
+                cd = true;
+            }
+            if (cd)
+            {
+                if (sniperCharge > 0)
+                {
+                    sniperCharge -= Time.deltaTime * 30;
+                }
+                else if (sniperCharge <= 0)
+                {
+                    cd = false;
+                }
+            }
+
+
+            float chargePercent = sniperCharge / sniperChargeTime;
+            cam.m_Lens.FieldOfView = baseFov + (sniperFovAdd * chargePercent);
+        }
+
+        if (Input.GetMouseButton(0) && gunClass.activeAmmo.gunType != GunType.sniper)
         {
             Shoot(gunClass.activeAmmo);
 
