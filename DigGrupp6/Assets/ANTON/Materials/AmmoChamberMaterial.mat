@@ -41,7 +41,7 @@ Material:
     - _AmmoAmmount4: 0
     - _FresnelScale: 2
     - _FresnelStrength: 4
-    - _NoiseScale: 5
+    - _NoiseScale: 10
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

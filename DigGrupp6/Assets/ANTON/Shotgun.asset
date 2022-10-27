@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   AmmoName: Shotgun
-  ammoAmmount: 890
+  gunType: 2
+  ammoAmmount: 880
   ammoSprite: {fileID: 0}
   bulletPrefab: {fileID: 5675527454140333540, guid: d8a80d9dc91cbaa47a764698013d695e,
     type: 3}
