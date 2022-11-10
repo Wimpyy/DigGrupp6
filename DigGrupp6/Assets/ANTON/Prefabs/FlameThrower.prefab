@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 8297721634060560745}
   - component: {fileID: 4800911506909258436}
   - component: {fileID: 1146357937247032653}
+  - component: {fileID: 1377122940040969355}
   m_Layer: 8
   m_Name: Texture
   m_TagString: Untagged
@@ -148,3 +149,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!210 &1377122940040969355
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412605713312906609}
+  m_Enabled: 1
+  m_SortingLayerID: -666074359
+  m_SortingLayer: 1
+  m_SortingOrder: 0

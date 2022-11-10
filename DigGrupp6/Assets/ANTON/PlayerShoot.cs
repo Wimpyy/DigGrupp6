@@ -9,6 +9,8 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera cam;
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject yoinkerObject;
+    [SerializeField] float yoinkFovAdd;
     [SerializeField] float sniperChargeTime;
     [SerializeField] float sniperFovAdd;
 
@@ -18,6 +20,8 @@ public class PlayerShoot : MonoBehaviour
 
     float baseFov;
     bool cd = false;
+    bool chargingSniper = false;
+    GameObject baseFollowTarget;
 
 
     private void Start()
@@ -25,18 +29,39 @@ public class PlayerShoot : MonoBehaviour
         gunClass = FindObjectOfType<GunClass>();
 
         baseFov = cam.m_Lens.FieldOfView;
+        baseFollowTarget = cam.Follow.gameObject;
+        yoinkerObject.SetActive(false);
     }
 
     private void Update()
     {
         fireRateTimer += Time.deltaTime;
         LookAtMouse();
+        if (Input.GetMouseButton(1))
+        {
+            yoinkerObject.SetActive(true);
+            if (cam.m_Lens.FieldOfView > (baseFov + yoinkFovAdd) && !chargingSniper)
+            {
+                cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, baseFov + yoinkFovAdd, Time.deltaTime * 3f);
+                cam.Follow = yoinkerObject.transform;
+            }
+        }
+        else
+        {
+            yoinkerObject.SetActive(false);
+            if (cam.m_Lens.FieldOfView < baseFov && !chargingSniper)
+            {
+                cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, baseFov, Time.deltaTime * 3f);
+                cam.Follow = baseFollowTarget.transform;
+            }
+        }
 
         if (gunClass.activeAmmo.gunType == GunType.sniper)
         {
 
             if (Input.GetMouseButton(0) && !cd)
             {
+                chargingSniper = true;
                 if (sniperCharge < sniperChargeTime)
                 {
                     sniperCharge += Time.deltaTime;
@@ -45,20 +70,26 @@ public class PlayerShoot : MonoBehaviour
             }
             if (Input.GetMouseButtonUp(0) && sniperCharge >= sniperChargeTime - .3f)
             {
+                chargingSniper = false;
                 Shoot(gunClass.activeAmmo);
                 gunClass.RefreshUI();
                 cd = true;
             }
+            if (Input.GetMouseButtonUp(0))
+            {
+                chargingSniper = false;
+            }
             if (cd)
             {
-                if (sniperCharge > 0)
-                {
-                    sniperCharge -= Time.deltaTime * 30;
-                }
-                else if (sniperCharge <= 0)
+                if (sniperCharge <= 0)
                 {
                     cd = false;
                 }
+            }
+
+            if (sniperCharge > 0 && !chargingSniper)
+            {
+                sniperCharge -= Time.deltaTime * 30;
             }
 
 
