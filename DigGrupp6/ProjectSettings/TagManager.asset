@@ -16,7 +16,7 @@ TagManager:
   - Player
   - Bullet
   - Gun
-  - 
+  - Background
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3628892937
     locked: 0
