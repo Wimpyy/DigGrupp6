@@ -24,9 +24,12 @@ public class PlayerMove : MonoBehaviour
     private bool hasJumped = false;
     private bool isSliding;
     private bool hasLanded;
+    private bool isHidden;
+    public bool IsHidden { get { return isHidden; } }
     private float slidedTime;
     private float slideDirection;
     private Vector3 graphicRotation;
+    private int touchedBushCount;
 
     void Start()
     {
@@ -39,6 +42,15 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (touchedBushCount >= 1)
+        {
+            isHidden = true;
+        }
+        else
+        {
+            isHidden = false;
+        }
+
         earlyJumpTimer -= Time.deltaTime;
 
         if (IsOnGround() && earlyJumpTimer > 0)
@@ -76,7 +88,7 @@ public class PlayerMove : MonoBehaviour
 
         if ((inputManager.IsCrouching || (isSliding && slidedTime <= slideDuration)) && IsOnGround())
         {
-            transform.localScale = new Vector3(1, 0.5f, 1);
+            //transform.localScale = new Vector3(1, 0.5f, 1);
 
             //Start slideing.
             if (!isSliding && Mathf.Abs(rb.velocity.x) >= crouchSpeed) 
@@ -168,5 +180,21 @@ public class PlayerMove : MonoBehaviour
         center.y -= 0.01f;
 
         return Physics.CheckBox(center, extents, Quaternion.identity, groundLayer);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("HideBush"))
+        {
+            touchedBushCount++;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("HideBush"))
+        {
+            touchedBushCount--;
+        }
     }
 }
