@@ -11,16 +11,11 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject yoinkerObject;
     [SerializeField] float yoinkFovAdd;
-    [SerializeField] float sniperChargeTime;
-    [SerializeField] float sniperFovAdd;
 
     GunClass gunClass;
     float fireRateTimer;
-    float sniperCharge = 0;
 
     float baseFov;
-    bool cd = false;
-    bool chargingSniper = false;
     GameObject baseFollowTarget;
 
 
@@ -39,8 +34,10 @@ public class PlayerShoot : MonoBehaviour
         LookAtMouse();
         if (Input.GetMouseButton(1))
         {
+
+            gunClass.RefreshUI();
             yoinkerObject.SetActive(true);
-            if (cam.m_Lens.FieldOfView > (baseFov + yoinkFovAdd) && !chargingSniper)
+            if (cam.m_Lens.FieldOfView > (baseFov + yoinkFovAdd))
             {
                 cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, baseFov + yoinkFovAdd, Time.deltaTime * 3f);
                 cam.Follow = yoinkerObject.transform;
@@ -48,56 +45,17 @@ public class PlayerShoot : MonoBehaviour
         }
         else
         {
+
+            gunClass.RefreshUI();
             yoinkerObject.SetActive(false);
-            if (cam.m_Lens.FieldOfView < baseFov && !chargingSniper)
+            if (cam.m_Lens.FieldOfView < baseFov)
             {
                 cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, baseFov, Time.deltaTime * 3f);
                 cam.Follow = baseFollowTarget.transform;
             }
         }
 
-        if (gunClass.activeAmmo.gunType == GunType.sniper)
-        {
-
-            if (Input.GetMouseButton(0) && !cd)
-            {
-                chargingSniper = true;
-                if (sniperCharge < sniperChargeTime)
-                {
-                    sniperCharge += Time.deltaTime;
-                }
-
-            }
-            if (Input.GetMouseButtonUp(0) && sniperCharge >= sniperChargeTime - .3f)
-            {
-                chargingSniper = false;
-                Shoot(gunClass.activeAmmo);
-                gunClass.RefreshUI();
-                cd = true;
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                chargingSniper = false;
-            }
-            if (cd)
-            {
-                if (sniperCharge <= 0)
-                {
-                    cd = false;
-                }
-            }
-
-            if (sniperCharge > 0 && !chargingSniper)
-            {
-                sniperCharge -= Time.deltaTime * 30;
-            }
-
-
-            float chargePercent = sniperCharge / sniperChargeTime;
-            cam.m_Lens.FieldOfView = baseFov + (sniperFovAdd * chargePercent);
-        }
-
-        if (Input.GetMouseButton(0) && gunClass.activeAmmo.gunType != GunType.sniper)
+        if (Input.GetMouseButton(0))
         {
             Shoot(gunClass.activeAmmo);
 
@@ -133,7 +91,6 @@ public class PlayerShoot : MonoBehaviour
 
                 Vector3 bulletDir = new Vector3(0, Random.Range(-activeAmmo.bulletSpread, activeAmmo.bulletSpread), 0);
                 bulletRb.velocity = transform.forward * activeAmmo.bulletSpeed + bulletDir;
-
 
                 Vector3 vel = bulletRb.velocity;
 
