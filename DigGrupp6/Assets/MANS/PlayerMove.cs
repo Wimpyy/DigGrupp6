@@ -20,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     private InputManager inputManager;
     public Collider coll;
     private Rigidbody rb;
+    private SaveManager saveManager;
     private float earlyJumpTimer;
     private bool hasJumped = false;
     private bool isSliding;
@@ -34,8 +35,14 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         inputManager = GetComponent<InputManager>();
+        saveManager = FindObjectOfType<SaveManager>();
         graphicRotation = graphics.localEulerAngles;
         rb = GetComponent<Rigidbody>();
+
+        if (saveManager.HasSaveFile())
+        {
+            transform.position = saveManager.Load().playerPos;
+        }
 
         inputManager.JumpEvent += TryJump;
     }
