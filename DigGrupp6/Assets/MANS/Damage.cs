@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    [SerializeField] float damage;
+    [SerializeField] int damage;
 
     PlayerLifeSupport playerLifeSupport;
 
