@@ -2,26 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] float shootSpeed;
-    [SerializeField] float bulletDistance;
+    [SerializeField] CinemachineVirtualCamera cam;
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject yoinkerObject;
+    [SerializeField] float yoinkFovAdd;
 
     GunClass gunClass;
     float fireRateTimer;
 
+    float baseFov;
+    GameObject baseFollowTarget;
+
+
     private void Start()
     {
         gunClass = FindObjectOfType<GunClass>();
+
+        baseFov = cam.m_Lens.FieldOfView;
+        baseFollowTarget = cam.Follow.gameObject;
+        yoinkerObject.SetActive(false);
     }
 
     private void Update()
     {
         fireRateTimer += Time.deltaTime;
         LookAtMouse();
+        if (Input.GetMouseButton(1))
+        {
+
+            gunClass.RefreshUI();
+            yoinkerObject.SetActive(true);
+            if (cam.m_Lens.FieldOfView > (baseFov + yoinkFovAdd))
+            {
+                cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, baseFov + yoinkFovAdd, Time.deltaTime * 3f);
+                cam.Follow = yoinkerObject.transform;
+            }
+        }
+        else
+        {
+
+            gunClass.RefreshUI();
+            yoinkerObject.SetActive(false);
+            if (cam.m_Lens.FieldOfView < baseFov)
+            {
+                cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, baseFov, Time.deltaTime * 3f);
+                cam.Follow = baseFollowTarget.transform;
+            }
+        }
 
         if (Input.GetMouseButton(0))
         {
@@ -59,7 +91,6 @@ public class PlayerShoot : MonoBehaviour
 
                 Vector3 bulletDir = new Vector3(0, Random.Range(-activeAmmo.bulletSpread, activeAmmo.bulletSpread), 0);
                 bulletRb.velocity = transform.forward * activeAmmo.bulletSpeed + bulletDir;
-
 
                 Vector3 vel = bulletRb.velocity;
 

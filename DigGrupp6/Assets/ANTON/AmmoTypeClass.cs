@@ -15,7 +15,7 @@ public enum GunType
 public class AmmoTypeClass : ScriptableObject
 {
     [SerializeField] string AmmoName;
-    //public GunType gunType;
+    public GunType gunType;
     public int ammoAmmount;
     public Sprite ammoSprite;
 

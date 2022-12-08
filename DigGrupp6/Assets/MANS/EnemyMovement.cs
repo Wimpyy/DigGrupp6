@@ -19,25 +19,29 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float playerDistance = (transform.position - enemyMain.player.position).sqrMagnitude;
+        float playerDistance = (transform.position - enemyMain.player.transform.position).sqrMagnitude;
         attackTimer -= Time.deltaTime;
-
-        if (playerDistance <= enemyMain.attackDistance && attackTimer <= 0)
-        {
-            enemyMain.damageCollider.enabled = true;
-            attackTimer = enemyMain.attackDuration + enemyMain.attackCooldown;
-        }
 
         if (attackTimer <= enemyMain.attackCooldown)
         {
             enemyMain.damageCollider.enabled = false;
         }
 
-        if (playerDistance <= enemyMain.sightDistance * enemyMain.sightDistance && attackTimer <= enemyMain.attackCooldown)
+        //Sees player
+        if (playerDistance <= enemyMain.sightDistance * enemyMain.sightDistance 
+            && attackTimer <= enemyMain.attackCooldown 
+            && !enemyMain.player.IsHidden)
         {
             Move();
+
+            //Attack
+            if (playerDistance <= enemyMain.attackDistance && attackTimer <= 0)
+            {
+                enemyMain.damageCollider.enabled = true;
+                attackTimer = enemyMain.attackDuration + enemyMain.attackCooldown;
+            }
         }
-        else
+        else //Idle
         {
             ChangeVelocity(0, enemyMain.deAccelerationTime);
         }

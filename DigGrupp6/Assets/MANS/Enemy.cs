@@ -15,13 +15,13 @@ public class Enemy : MonoBehaviour
     public Collider damageCollider;
 
     [NonSerialized] public Rigidbody rb;
-    [NonSerialized] public Transform player;
+    [NonSerialized] public PlayerMove player;
 
     void Start()
     {
         damageCollider.enabled = false;
         rb = GetComponent<Rigidbody>();
-        player = FindObjectOfType<PlayerMove>().transform;
+        player = FindObjectOfType<PlayerMove>();
     }
 
     void Update()
