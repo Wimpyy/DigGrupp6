@@ -119,6 +119,7 @@ public class PlayerLifeSupport : MonoBehaviour
                         {
                             heartsArray[i].GetComponent<Image>().sprite = heartImageArray[2];
                         }
+                        Debug.Log("array current value is " + heartValueIndex[i]);
                     }
                     StartCoroutine(DamageThrob(heartsArray[i].gameObject));
                     break;
@@ -145,14 +146,11 @@ public class PlayerLifeSupport : MonoBehaviour
                         }
                         else if (shieldValueIndex[i] == 1)
                         {
-                            shieldArray[i].GetComponent<Image>().sprite = shieldImageArray[1];
+                            shieldArray[i].GetComponent<Image>().sprite = shieldImageArray[0];
                         }
+                        Debug.Log("array current value is " + shieldValueIndex[i]);
                         StartCoroutine(DamageThrob(shieldArray[i].gameObject));
                         break;
-                    }
-                    if (shieldValueIndex[0] == 1)
-                    {
-                        shieldArray[0].GetComponent<Image>().sprite = shieldImageArray[1];
                     }
                 }
                 else
@@ -247,17 +245,23 @@ public class PlayerLifeSupport : MonoBehaviour
         //Reset all hearts and values that should be renewed.
     }
 
-    IEnumerator DamageThrob(GameObject currentHeart)
+    IEnumerator DamageThrob(GameObject currentIndicator)
     {
         if (!overShieldActive)
         {
-            currentHeart.GetComponent<Image>().color = Color.red;
-            currentHeart.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", true);
+            currentIndicator.GetComponent<Image>().color = Color.red;
+            currentIndicator.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", true);
 
             yield return new WaitForSecondsRealtime(0.3f);
 
-            currentHeart.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", false);
-            currentHeart.GetComponent<Image>().color = Color.white;
+            currentIndicator.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", false);
+            currentIndicator.GetComponent<Image>().color = Color.white;
+        }
+        else if (overShieldActive)
+        {
+            currentIndicator.GetComponent<Image>().color = Color.red;
+            //currentIndicator.GetComponent<Animator>().SetBool("")
+
         }
 
     }
