@@ -10462,7 +10462,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   maxShield: 10
+  currentShield: 0
   heartsArray:
   - {fileID: 0}
   - {fileID: 0}
@@ -10479,10 +10481,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 10a3c5a65de9a4b4084918dd23c87521, type: 3}
   - {fileID: 21300000, guid: 89486526ca0c6b44ca59eb72e515bf29, type: 3}
   - {fileID: 21300000, guid: dfef66732312dc34a84f6d13583f13af, type: 3}
+  shieldImageArray: []
   takeDamageHeartAnim: {fileID: 0}
+  takeDamageShieldAnim: {fileID: 0}
   ifHearts: 1
   ifBar: 0
+  overShieldActive: 1
   heartValueIndex: 
+  shieldValueIndex: 
 --- !u!114 &7674614574123554194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10495,9 +10501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25dfd3b3a93fb04682bb680a3893c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 7
+  walkSpeed: 8
   crouchSpeed: 2
-  jumpForce: 300
+  jumpForce: 600
   earlyJumpDuration: 0.2
   accelerationTime: 6
   deAccelerationTime: 8
@@ -10811,6 +10817,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.971525e-16
       objectReference: {fileID: 0}
+    - target: {fileID: -3951613538402890808, guid: edcaf5875a9e5234cb3cca29903f4dcd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e01527acd3962ee4dbbe9c511b0ce740, type: 2}
     - target: {fileID: -1715401978222180422, guid: edcaf5875a9e5234cb3cca29903f4dcd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
