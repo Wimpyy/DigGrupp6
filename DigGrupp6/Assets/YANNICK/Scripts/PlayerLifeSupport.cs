@@ -8,36 +8,51 @@ using UnityEngine.UI;
 
 public class PlayerLifeSupport : MonoBehaviour
 {
+    #region Sustainance Values
     [SerializeField] int maxHealth = 1000;
     [SerializeField] int currentHealth;
     [SerializeField] int maxShield = 500;
     [SerializeField] int currentShield;
+    #endregion
 
+    #region Object Arrays
     public GameObject[] heartsArray;
     public GameObject[] shieldArray;
-    
+    #endregion
+
+    #region UI Element Objects
     [SerializeField] GameObject heart;
     [SerializeField] GameObject shield;
+    #endregion
 
+    #region UI Element Position
     [SerializeField] Canvas healthCanvas;
     [SerializeField] Transform heartsPos;
     [SerializeField] Transform shieldPos;
-
     [SerializeField, Range(0, 200)] float heartSpreadement;
     [SerializeField, Range(0, 200)] float shieldSpreadement;
+    #endregion
 
+    #region Image Arrays
     [SerializeField] Sprite[] heartImageArray;
     [SerializeField] Sprite[] shieldImageArray;
+    #endregion
 
+    #region UI Animations
     [SerializeField] AnimationClip takeDamageHeartAnim;
     [SerializeField] AnimationClip takeDamageShieldAnim;
+    #endregion
 
+    #region Booleans
     public bool ifHearts = false;
     public bool ifBar = true;
     public bool overShieldActive = true;
+    #endregion
 
+    #region Value Indecies
     [SerializeField] int[] heartValueIndex;
     [SerializeField] int[] shieldValueIndex;
+    #endregion
 
     void Start()
     {
@@ -90,6 +105,7 @@ public class PlayerLifeSupport : MonoBehaviour
 
     public void TakeDamage(int damageToTake)
     {
+        #region Bar Mode Health System
         if (ifBar)
         {
             if (currentShield < 0)
@@ -102,6 +118,8 @@ public class PlayerLifeSupport : MonoBehaviour
                 int healthDamage = Mathf.Min(currentHealth, damageToTake - shieldDamage);
             }
         }
+        #endregion
+        #region Heart Mode Health System
         else if (ifHearts && !overShieldActive)
         {
             for (int i = heartValueIndex.Length-1; i >= 0; i--)
@@ -131,6 +149,7 @@ public class PlayerLifeSupport : MonoBehaviour
                 }
             }
         }
+        #region Shield Stuff
         else if (ifHearts && overShieldActive)
         {
             for (int i = shieldValueIndex.Length-1; i >= 1; i--)
@@ -148,16 +167,13 @@ public class PlayerLifeSupport : MonoBehaviour
                         {
                             shieldArray[i].GetComponent<Image>().sprite = shieldImageArray[0];
                         }
-                        Debug.Log("array current value is " + shieldValueIndex[i]);
                         StartCoroutine(DamageThrob(shieldArray[i].gameObject));
-                        break;
+                        Debug.Log("array current value is " + shieldValueIndex[i]);
                     }
                 }
-                else
-                {
-
-                }
             }
+            #endregion
+            #endregion
         }
     }
 
@@ -263,7 +279,6 @@ public class PlayerLifeSupport : MonoBehaviour
             //currentIndicator.GetComponent<Animator>().SetBool("")
 
         }
-
     }
 
     IEnumerator HealThrob(GameObject currentHeart)
