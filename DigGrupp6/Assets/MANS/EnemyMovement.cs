@@ -32,17 +32,24 @@ public class EnemyMovement : MonoBehaviour
             && attackTimer <= enemyMain.attackCooldown 
             && !enemyMain.player.IsHidden)
         {
+            enemyMain.anim.SetBool("Walking", true);
             Move();
 
             //Attack
             if (playerDistance <= enemyMain.attackDistance && attackTimer <= 0)
             {
+                enemyMain.anim.SetBool("Clap", true);
                 enemyMain.damageCollider.enabled = true;
                 attackTimer = enemyMain.attackDuration + enemyMain.attackCooldown;
+            }
+            else if(playerDistance >= enemyMain.attackDistance)
+            {
+                enemyMain.anim.SetBool("Clap", false);
             }
         }
         else //Idle
         {
+            enemyMain.anim.SetBool("Walking", false);
             ChangeVelocity(0, enemyMain.deAccelerationTime);
         }
     }
