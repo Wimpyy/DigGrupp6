@@ -38,4 +38,9 @@ public class SceneExit : MonoBehaviour
             sceneLoader.LoadScene(sceneToLoad);
         }
     }
+
+    public string GetScene()
+    {
+        return sceneToLoad;
+    }
 }

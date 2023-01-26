@@ -568,6 +568,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1055755431, guid: e69c2643c563c6d40a672a8bad37dfc8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055755433, guid: e69c2643c563c6d40a672a8bad37dfc8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1055755433, guid: e69c2643c563c6d40a672a8bad37dfc8, type: 3}
       propertyPath: ammoSlotCursor
       value: 
@@ -580,6 +588,15 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2039817939}
+    - target: {fileID: 1055755434, guid: e69c2643c563c6d40a672a8bad37dfc8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4175129306315151626, guid: e69c2643c563c6d40a672a8bad37dfc8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4175129306315151626, guid: e69c2643c563c6d40a672a8bad37dfc8,
         type: 3}
       propertyPath: currentHealth
@@ -654,6 +671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpForce
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674614574123554194, guid: e69c2643c563c6d40a672a8bad37dfc8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7674614574123554194, guid: e69c2643c563c6d40a672a8bad37dfc8,
         type: 3}
@@ -1632,6 +1654,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 159294230779377715, guid: c55c3f0bd8f8c684592a21414e18a430,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 159294231085523053, guid: c55c3f0bd8f8c684592a21414e18a430,
         type: 3}
       propertyPath: sceneToLoad

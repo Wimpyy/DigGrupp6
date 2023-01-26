@@ -11,6 +11,7 @@ public class SceneLoader : MonoBehaviour
     bool fadeIn;
     bool fadeOut;
     string sceneName;
+    string oldSceneName;
 
     void Awake()
     {
@@ -29,17 +30,6 @@ public class SceneLoader : MonoBehaviour
 
     void Update()
     {
-        if (fadeOut)
-        {
-            fadeCanvasGroup.alpha += (1 / fadeTime) * Time.deltaTime;
-
-            if (fadeCanvasGroup.alpha >= 1)
-            {
-                SceneManager.LoadScene(sceneName);
-                fadeOut = false;
-            }
-        }
-
         if (fadeIn)
         {
             fadeCanvasGroup.alpha -= (1 / fadeTime) * Time.deltaTime;
@@ -47,6 +37,19 @@ public class SceneLoader : MonoBehaviour
             if (fadeCanvasGroup.alpha <= 0)
             {
                 fadeIn = false;
+            }
+        }
+
+        if (fadeOut)
+        {
+            fadeCanvasGroup.alpha += (1 / fadeTime) * Time.deltaTime;
+
+            if (fadeCanvasGroup.alpha >= 1)
+            {
+                oldSceneName = SceneManager.GetActiveScene().name;
+                SceneManager.LoadScene(sceneName);
+                fadeOut = false;
+                fadeIn = true;
             }
         }
     }
@@ -58,5 +61,5 @@ public class SceneLoader : MonoBehaviour
         fadeOut = true;
     }
 
-    public string GetPreviousScene() { return sceneName; }
+    public string GetPreviousScene() { return oldSceneName; }
 }
