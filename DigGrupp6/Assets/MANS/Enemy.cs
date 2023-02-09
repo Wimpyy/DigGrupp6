@@ -9,7 +9,8 @@ public class Enemy : MonoBehaviour
     public float sightDistance;
     public float accelerationTime;
     public float deAccelerationTime;
-    public float attackDuration;
+    public float attackWindupDuration;
+    public float attackDamageDuration;
     public float attackCooldown;
     public float attackDistance;
     public Collider damageCollider;

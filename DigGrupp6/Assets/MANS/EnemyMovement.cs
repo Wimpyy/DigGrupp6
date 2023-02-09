@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     private Enemy enemyMain;
     private float attackTimer;
     private float sizeX;
+    private bool isAttacking;
 
     // Start is called before the first frame update
     void Start()
@@ -20,37 +21,30 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         float playerDistance = (transform.position - enemyMain.player.transform.position).sqrMagnitude;
-        attackTimer -= Time.deltaTime;
 
-        if (attackTimer <= enemyMain.attackCooldown)
+        if (!isAttacking)
         {
-            enemyMain.damageCollider.enabled = false;
+            attackTimer -= Time.deltaTime;
         }
 
         //Sees player
-        if (playerDistance <= enemyMain.sightDistance * enemyMain.sightDistance 
-            && attackTimer <= enemyMain.attackCooldown 
-            && !enemyMain.player.IsHidden)
+        if (playerDistance <= enemyMain.sightDistance * enemyMain.sightDistance)
         {
             enemyMain.anim.SetBool("Walking", true);
             Move();
-
-            //Attack
-            if (playerDistance <= enemyMain.attackDistance && attackTimer <= 0)
-            {
-                enemyMain.anim.SetBool("Clap", true);
-                enemyMain.damageCollider.enabled = true;
-                attackTimer = enemyMain.attackDuration + enemyMain.attackCooldown;
-            }
-            else if(playerDistance >= enemyMain.attackDistance)
-            {
-                enemyMain.anim.SetBool("Clap", false);
-            }
         }
         else //Idle
         {
             enemyMain.anim.SetBool("Walking", false);
             ChangeVelocity(0, enemyMain.deAccelerationTime);
+        }
+
+        //Attack
+        if (playerDistance <= enemyMain.attackDistance 
+            && attackTimer <= 0
+            && !enemyMain.player.IsHidden)
+        {
+            StartCoroutine(Attack());
         }
     }
 
@@ -73,5 +67,22 @@ public class EnemyMovement : MonoBehaviour
         }
 
         enemyMain.rb.velocity = velocity;
+    }
+
+    IEnumerator Attack()
+    {
+        isAttacking = true;
+        enemyMain.anim.SetTrigger("Clap");
+        print("Clap");
+        attackTimer = enemyMain.attackCooldown * Random.Range(0.8f, 1.2f);
+
+        yield return new WaitForSeconds(enemyMain.attackWindupDuration);
+
+        enemyMain.damageCollider.enabled = true;
+
+        yield return new WaitForSeconds(enemyMain.attackDamageDuration);
+
+        enemyMain.damageCollider.enabled = false;
+        isAttacking = false;
     }
 }
