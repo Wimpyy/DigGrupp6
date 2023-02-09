@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     private InputManager inputManager;
     public Collider coll;
     private Rigidbody rb;
+    private Animator anim;
     private SaveManager saveManager;
     private float earlyJumpTimer;
     private bool hasJumped = false;
@@ -42,6 +43,7 @@ public class PlayerMove : MonoBehaviour
         saveManager = FindObjectOfType<SaveManager>();
         graphicRotation = graphics.localEulerAngles;
         rb = GetComponent<Rigidbody>();
+        anim = graphics.gameObject.GetComponent<Animator>();
 
         if (saveManager.HasSaveFile())
         {
@@ -142,11 +144,13 @@ public class PlayerMove : MonoBehaviour
 
             if (isInputingMovement)
             {
+                anim.SetBool("Walking", true);
                 ChangeVelocity(walkSpeed * inputManager.MovementValue.x, accelerationTime);
             }
             else
             {
                 ChangeVelocity(0, deAccelerationTime);
+                anim.SetBool("Walking", false);
             }
         }
     }

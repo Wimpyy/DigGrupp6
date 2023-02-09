@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public float attackDistance;
     public Collider damageCollider;
 
+    [NonSerialized] public Animator anim;
     [NonSerialized] public Rigidbody rb;
     [NonSerialized] public PlayerMove player;
 
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
         damageCollider.enabled = false;
         rb = GetComponent<Rigidbody>();
         player = FindObjectOfType<PlayerMove>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
