@@ -48,6 +48,7 @@ public class PlayerLifeSupport : MonoBehaviour
     public bool ifHearts = false;
     public bool ifBar = true;
     public bool overShieldActive = true;
+    public bool fullHealth;
     #endregion
 
     #region Value Indecies
@@ -78,6 +79,7 @@ public class PlayerLifeSupport : MonoBehaviour
             heartsArray[i].transform.localPosition = new Vector3(heartsPos.transform.localPosition.x + (i * heartSpreadement), heartsPos.transform.localPosition.y, 0);
             heartsArray[i].GetComponent<Image>().sprite = heartImageArray[0];
             heartValueIndex[i] = 1;
+            fullHealth = true;
         }
 
         shieldValueIndex = new int[shieldArray.Length];
@@ -157,6 +159,7 @@ public class PlayerLifeSupport : MonoBehaviour
             if (heartValueIndex[i] >= 0)
             {
                 heartValueIndex[i]--;
+                fullHealth = false;
                 foreach (int iHeart in heartValueIndex)
                 {
                     if (heartValueIndex[i] == 0)
@@ -184,7 +187,6 @@ public class PlayerLifeSupport : MonoBehaviour
     {
         for (int i = shieldValueIndex.Length - 1; i == 1; i -= 1)
         {
-
             if (shieldValueIndex[0] == 1 || shieldValueIndex[1] == 1)
             {
                 if (shieldValueIndex[1] <= 0)
@@ -192,14 +194,19 @@ public class PlayerLifeSupport : MonoBehaviour
                     shieldValueIndex[0]--;
                     overShieldActive = false;
                 }
-                shieldValueIndex[1] --;
+                shieldValueIndex[1]--;
+                if (shieldValueIndex[1] < 0)
+                {
+                    shieldValueIndex[1] = 0;
+                }
                 foreach (int iShield in shieldValueIndex)
                 {
                     if (shieldValueIndex[1] == 0)
                     {
                         shieldArray[1].GetComponent<Image>().sprite = shieldImageArray[1];
                     }
-                    else if (shieldValueIndex[0] == 0)
+
+                    if (shieldValueIndex[0] == 0)
                     {
                         shieldArray[0].GetComponent<Image>().sprite = shieldImageArray[1];
                     }
@@ -233,6 +240,10 @@ public class PlayerLifeSupport : MonoBehaviour
                     heartsArray[i].GetComponent<Image>().sprite = heartImageArray[0];
                     heartValueIndex[i]++;
                     StartCoroutine(HealThrob(heartsArray[i].gameObject));
+                    if (heartValueIndex[heartValueIndex.Length - 1] == 1)
+                    {
+                        fullHealth = true;
+                    }
                     return;
                 }
 
@@ -262,24 +273,24 @@ public class PlayerLifeSupport : MonoBehaviour
             }
             for (int i = 0; i < 1; i++)
             {
-                if (shieldValueIndex[i] == 0)
+                if (shieldValueIndex[0] <= 0)
                 {
-                    shieldArray[i].GetComponent<Image>().sprite = shieldImageArray[1];
-                    shieldValueIndex[i]++;
-                    StartCoroutine(ShieldGainEffect(shieldArray[i].gameObject));
+                    overShieldActive = true;
+                    shieldValueIndex[0]++;
+                    StartCoroutine(ShieldGainEffect(shieldArray[0].gameObject));
+                    shieldArray[0].GetComponent<Image>().sprite = shieldImageArray[0];
                     return;
                 }
 
-                if (shieldValueIndex[i] == 1)
+                if (shieldValueIndex[1] <= 0)
                 {
-                    shieldArray[i].GetComponent<Image>().sprite = shieldImageArray[0];
-                    StartCoroutine(ShieldGainEffect(shieldArray[i].gameObject));
+                    if (shieldValueIndex[0] > 0)
+                    {
+                        shieldValueIndex[1]++;
+                        StartCoroutine(ShieldGainEffect(shieldArray[1].gameObject));
+                        shieldArray[1].GetComponent<Image>().sprite = shieldImageArray[0];
+                    }
                     return;
-                }
-
-                if (shieldValueIndex[i] == 1)
-                {
-                    shieldArray[i].GetComponent<Image>().sprite = shieldImageArray[0];
                 }
             }
         }
@@ -310,10 +321,12 @@ public class PlayerLifeSupport : MonoBehaviour
         else if (overShieldActive)
         {
             currentIndicator.GetComponent<Image>().color = Color.red;
-            yield return new WaitForSecondsRealtime(0.5f);
-            currentIndicator.GetComponent<Image>().color = Color.white;
-            //currentIndicator.GetComponent<Animator>().SetBool("")
+            currentIndicator.GetComponent<Animator>().SetBool("ShieldDamageAnim", true);
 
+            yield return new WaitForSecondsRealtime(0.5f);
+
+            currentIndicator.GetComponent<Image>().color = Color.white;
+            currentIndicator.GetComponent<Animator>().SetBool("ShieldDamageAnim", false);
         }
     }
 
@@ -330,7 +343,7 @@ public class PlayerLifeSupport : MonoBehaviour
 
     IEnumerator ShieldGainEffect(GameObject currentShield)
     {
-        currentShield.GetComponent<Image>().color = Color.cyan;
+        currentShield.GetComponent<Image>().color = Color.blue;
         currentShield.GetComponent<Animator>().SetBool("ShieldGainEffect", true);
 
         yield return new WaitForSecondsRealtime(0.4f);
