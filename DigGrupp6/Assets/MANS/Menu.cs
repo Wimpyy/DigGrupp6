@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
 {
     public void LoadScene(string name)
     {
-        SceneManager.LoadScene(name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(name);
     }
 
     public void Quit()

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerMove : MonoBehaviour
 {
     public float walkSpeed;
     public float crouchSpeed;
     public float jumpForce;
+    public Vector3 jumpImpulse;
     public float earlyJumpDuration;
     public float accelerationTime;
     public float deAccelerationTime;
@@ -32,9 +34,11 @@ public class PlayerMove : MonoBehaviour
     private float slideDirection;
     private Vector3 graphicRotation;
     private int touchedBushCount;
+    private CinemachineImpulseSource impulseSource;
 
     void Start()
     {
+        impulseSource = GetComponent<CinemachineImpulseSource>();
         inputManager = GetComponent<InputManager>();
         saveManager = FindObjectOfType<SaveManager>();
         graphicRotation = graphics.localEulerAngles;
@@ -43,7 +47,7 @@ public class PlayerMove : MonoBehaviour
 
         if (saveManager.HasSaveFile())
         {
-            transform.position = saveManager.Load().playerPos;
+            //transform.position = saveManager.Load().playerPos;
         }
 
         inputManager.JumpEvent += TryJump;
@@ -70,6 +74,7 @@ public class PlayerMove : MonoBehaviour
 
         if (IsOnGround() && !hasLanded)
         {
+            impulseSource.GenerateImpulse(jumpImpulse);
             landParticle.Play();
             hasLanded = true;
         }
@@ -174,6 +179,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (hasJumped) { return; }
 
+        impulseSource.GenerateImpulse(jumpImpulse);
         hasJumped = true;
         Vector3 vel = rb.velocity;
         vel.y = 0;
