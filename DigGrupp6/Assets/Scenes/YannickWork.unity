@@ -238,6 +238,86 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!330 &339491871 stripped
+ParticleSystemForceField:
+  m_CorrespondingSourceObject: {fileID: 339491871, guid: 3a2d9f95f68261a4dae34806776597a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3590523209783947431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &450410154
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 301207353136069328, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthSpore (Activate Upon Death Of Enemy)
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069330, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: ExternalForcesModule.influenceList.Array.data[0]
+      value: 
+      objectReference: {fileID: 339491871}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301207353136069333, guid: 9439e11697592e242b8ab7efd35f169d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9439e11697592e242b8ab7efd35f169d, type: 3}
 --- !u!1 &537375485
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,12 +727,12 @@ PrefabInstance:
     - target: {fileID: 3590523209336603024, guid: 3a2d9f95f68261a4dae34806776597a9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.22
       objectReference: {fileID: 0}
     - target: {fileID: 3590523209336603024, guid: 3a2d9f95f68261a4dae34806776597a9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 3590523209336603024, guid: 3a2d9f95f68261a4dae34806776597a9,
         type: 3}
@@ -692,7 +772,7 @@ PrefabInstance:
     - target: {fileID: 3590523209336603025, guid: 3a2d9f95f68261a4dae34806776597a9,
         type: 3}
       propertyPath: m_Name
-      value: HealthManager(Will be placed on player)
+      value: PlayerLifeSupport
       objectReference: {fileID: 0}
     - target: {fileID: 3590523209336603039, guid: 3a2d9f95f68261a4dae34806776597a9,
         type: 3}
@@ -709,10 +789,5 @@ PrefabInstance:
       propertyPath: healthCanvas
       value: 
       objectReference: {fileID: 537375488}
-    - target: {fileID: 3590523209336603039, guid: 3a2d9f95f68261a4dae34806776597a9,
-        type: 3}
-      propertyPath: takeDamageShieldAnim
-      value: 
-      objectReference: {fileID: 7400000, guid: 8b0514f4fc585354283cd3e2c8a73374, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a2d9f95f68261a4dae34806776597a9, type: 3}
