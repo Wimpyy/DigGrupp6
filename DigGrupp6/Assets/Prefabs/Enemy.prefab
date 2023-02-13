@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6183308837719339117}
   m_Layer: 0
   m_Name: DamageCollider
-  m_TagString: Untagged
+  m_TagString: Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,9 @@ MonoBehaviour:
   sightDistance: 30
   accelerationTime: 5
   deAccelerationTime: 3
-  attackDuration: 1
-  attackCooldown: 0.05
+  attackWindupDuration: 0.3
+  attackDamageDuration: 0.3
+  attackCooldown: 0.6
   attackDistance: 12
   damageCollider: {fileID: 6183308837719339117}
 --- !u!114 &6183308838727589904

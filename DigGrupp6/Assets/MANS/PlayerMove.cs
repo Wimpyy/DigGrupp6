@@ -128,7 +128,7 @@ public class PlayerMove : MonoBehaviour
                 }
                 else
                 {
-                    ChangeVelocity(0, deAccelerationTime);
+                    ChangeVelocity(0, slideDeAccelerationTime);
                 }
             }
         }
