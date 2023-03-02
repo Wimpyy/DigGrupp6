@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4513719274969285673}
   - component: {fileID: 3765093404432930118}
   - component: {fileID: 7239787080827482839}
+  - component: {fileID: 2779352079807591114}
   m_Layer: 8
   m_Name: MachineGun
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +98,15 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2779352079807591114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675527454140333540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f446467e1f526d4396f8a052bb937c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

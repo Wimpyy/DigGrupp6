@@ -25,6 +25,8 @@ public class AmmoTypeClass : ScriptableObject
     public float bulletLifeTime;
     public float fireRate;
     public float bulletSpread;
+    public float knockback;
+    public float damage;
 
     public void AddAmmo(int amt)
     {

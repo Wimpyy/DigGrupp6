@@ -12,7 +12,8 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] GameObject yoinkerObject;
     [SerializeField] float yoinkFovAdd;
 
-    GunClass gunClass;
+    [HideInInspector]
+    public GunClass gunClass;
     float fireRateTimer;
 
     float baseFov;

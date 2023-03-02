@@ -19,7 +19,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5675527454140333540, guid: d8a80d9dc91cbaa47a764698013d695e,
     type: 3}
   bulletAmmount: 5
-  bulletSpeed: 35
+  bulletSpeed: 50
   bulletLifeTime: 3
   fireRate: 1
   bulletSpread: 10
+  knockback: 15
+  damage: 10
