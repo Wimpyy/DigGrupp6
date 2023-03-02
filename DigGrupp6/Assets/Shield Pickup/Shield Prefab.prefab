@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8126207665270086651}
   - component: {fileID: 8126207665270086650}
+  - component: {fileID: 806369075}
   m_Layer: 0
   m_Name: Shield Prefab
   m_TagString: Untagged
@@ -192,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 8902990281537388865}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.66, y: -0.57, z: -4.856271}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5366074668726251977}
@@ -220,3 +221,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &806369075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8902990281537388865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b05f2ae7fcae94b928e78868919d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceForActivation: 5
+  player: {fileID: 0}

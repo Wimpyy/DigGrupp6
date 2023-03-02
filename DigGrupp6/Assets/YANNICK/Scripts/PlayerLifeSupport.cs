@@ -351,4 +351,5 @@ public class PlayerLifeSupport : MonoBehaviour
         currentShield.GetComponent<Animator>().SetBool("ShieldGainEffect", false);
         currentShield.GetComponent<Image>().color = Color.white;
     }
+
 }

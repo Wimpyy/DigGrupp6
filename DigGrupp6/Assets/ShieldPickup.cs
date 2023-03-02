@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class ShieldPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float distanceForActivation;
+    [SerializeField] Transform player;
+    Animator anim;
+
+    private void Awake()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        
+        float distance = Vector3.Distance(player.position, transform.position);
+
+        if (distance < distanceForActivation)
+        {
+            anim.SetBool("Open", true);
+        }
+        else
+        {
+            anim.SetBool("Open", false);
+        }
     }
 }
