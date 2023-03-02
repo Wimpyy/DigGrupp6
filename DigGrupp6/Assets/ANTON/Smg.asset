@@ -23,3 +23,5 @@ MonoBehaviour:
   bulletLifeTime: 2
   fireRate: 0.1
   bulletSpread: 3
+  knockback: 5
+  damage: 10

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Damage
   - HideBush
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int healthGainValue = 5;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        FindObjectOfType<PlayerLifeSupport>().GainHealth(healthGainValue);
     }
 }

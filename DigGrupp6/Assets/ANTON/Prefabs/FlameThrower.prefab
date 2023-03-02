@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 771758395303897796}
   - component: {fileID: 7239787080827482839}
   - component: {fileID: 4921042187677544651}
+  - component: {fileID: -4698519109872368713}
   m_Layer: 8
   m_Name: FlameThrower
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,6 +66,18 @@ MonoBehaviour:
   colorFade: 0.12
   sizeFade: 0.1
   endColor: {r: 1, g: 0.07809825, b: 0, a: 0.40392157}
+--- !u!114 &-4698519109872368713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675527454140333540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f446467e1f526d4396f8a052bb937c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6412605713312906609
 GameObject:
   m_ObjectHideFlags: 0
