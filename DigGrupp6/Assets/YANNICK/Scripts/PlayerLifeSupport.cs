@@ -121,6 +121,7 @@ public class PlayerLifeSupport : MonoBehaviour
         }
     }
 
+    #region TakeDamageFunctions
     public void TakeDamage(int damageToTake)
     {
         #region Bar Mode Health System
@@ -217,6 +218,34 @@ public class PlayerLifeSupport : MonoBehaviour
         }
     }
 
+    IEnumerator DamageThrob(GameObject currentIndicator)
+    {
+        if (!overShieldActive)
+        {
+            currentIndicator.GetComponent<Image>().color = Color.red;
+            currentIndicator.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", true);
+
+            yield return new WaitForSecondsRealtime(0.3f);
+
+            currentIndicator.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", false);
+            currentIndicator.GetComponent<Image>().color = Color.white;
+        }
+        else if (overShieldActive)
+        {
+            currentIndicator.GetComponent<Image>().color = Color.red;
+            currentIndicator.GetComponent<Animator>().SetBool("ShieldDamageAnim", true);
+
+            yield return new WaitForSecondsRealtime(0.5f);
+
+            currentIndicator.GetComponent<Image>().color = Color.white;
+            currentIndicator.GetComponent<Animator>().SetBool("ShieldDamageAnim", false);
+        }
+    }
+    #endregion
+
+    #region GainFunctions
+
+
     public void GainHealth(int healthToGain)
     {
         if (ifBar)
@@ -296,40 +325,6 @@ public class PlayerLifeSupport : MonoBehaviour
         }
     }
 
-    public void PlayerDeath()
-    {
-        // Play the death animation, die, respawn at the last checkpoint with full hp and no shield
-    }
-
-    public void PlayerSpawn()
-    {
-        //Reset all hearts and values that should be renewed.
-    }
-
-    IEnumerator DamageThrob(GameObject currentIndicator)
-    {
-        if (!overShieldActive)
-        {
-            currentIndicator.GetComponent<Image>().color = Color.red;
-            currentIndicator.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", true);
-
-            yield return new WaitForSecondsRealtime(0.3f);
-
-            currentIndicator.GetComponent<Animator>().SetBool("HeartTakeDamageThrob", false);
-            currentIndicator.GetComponent<Image>().color = Color.white;
-        }
-        else if (overShieldActive)
-        {
-            currentIndicator.GetComponent<Image>().color = Color.red;
-            currentIndicator.GetComponent<Animator>().SetBool("ShieldDamageAnim", true);
-
-            yield return new WaitForSecondsRealtime(0.5f);
-
-            currentIndicator.GetComponent<Image>().color = Color.white;
-            currentIndicator.GetComponent<Animator>().SetBool("ShieldDamageAnim", false);
-        }
-    }
-
     IEnumerator HealThrob(GameObject currentHeart)
     {
         currentHeart.GetComponent<Image>().color = Color.green;
@@ -350,5 +345,16 @@ public class PlayerLifeSupport : MonoBehaviour
 
         currentShield.GetComponent<Animator>().SetBool("ShieldGainEffect", false);
         currentShield.GetComponent<Image>().color = Color.white;
+    }
+    #endregion
+
+    public void PlayerDeath()
+    {
+        // Play the death animation, die, respawn at the last checkpoint with full hp and no shield
+    }
+
+    public void PlayerSpawn()
+    {
+        //Reset all hearts and values that should be renewed.
     }
 }
