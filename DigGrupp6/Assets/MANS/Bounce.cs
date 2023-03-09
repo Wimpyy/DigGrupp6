@@ -8,10 +8,12 @@ public class Bounce : MonoBehaviour
     public float bounceForce;
     private Rigidbody rb;
     private ParticleSystem particle;
+    private AudioSource aS;
     [SerializeField] Animator anim;
 
     void Start()
     {
+        aS = GetComponent<AudioSource>();
         rb = FindObjectOfType<PlayerMove>().GetComponent<Rigidbody>();
         particle = transform.parent.GetComponentInChildren<ParticleSystem>();
     }
@@ -20,6 +22,7 @@ public class Bounce : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            aS.Play();
             particle.Play();
             anim.SetTrigger("Bounce");
             Vector3 forceInput = transform.up;
