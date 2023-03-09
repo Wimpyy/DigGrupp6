@@ -8,6 +8,7 @@ public class Bounce : MonoBehaviour
     public float bounceForce;
     private Rigidbody rb;
     private ParticleSystem particle;
+    [SerializeField] Animator anim;
 
     void Start()
     {
@@ -20,7 +21,9 @@ public class Bounce : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             particle.Play();
-            rb.AddForce(0, bounceForce, 0);
+            anim.SetTrigger("Bounce");
+            Vector3 forceInput = transform.up;
+            rb.AddForce(bounceForce * forceInput);
         }
     }
 }
