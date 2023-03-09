@@ -6,10 +6,12 @@ public class Key : MonoBehaviour
 {
     public string keyId;
     public ParticleSystem particle;
+    AudioSource audioSource;
     KeyManager keyManager;
 
     void Start()
     {
+        audioSource = GetComponentInChildren<AudioSource>();
         keyManager = FindObjectOfType<KeyManager>();
         if (keyManager.ContainsKey(keyId))
         {
@@ -28,6 +30,7 @@ public class Key : MonoBehaviour
         {
             particle.transform.parent = null;
             particle.Play();
+            audioSource.Play();
             Destroy(particle.gameObject, 10);
 
             keyManager.AddKey(keyId);

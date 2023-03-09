@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmmoName: Sniper
   gunType: 1
-  ammoAmmount: 12
+  ammoAmmount: 3
   ammoSprite: {fileID: 0}
+  audios:
+  - {fileID: 8300000, guid: 59e3fe34b37a6a449b502f388998f48b, type: 3}
+  audioDensity: 1
   bulletPrefab: {fileID: 5675527454140333540, guid: 1a1ba9d92e14c1b4d90e6c38354534f9,
     type: 3}
   bulletAmmount: 1

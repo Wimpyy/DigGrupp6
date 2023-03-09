@@ -14,8 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmmoName: FlameThrower
   gunType: 0
-  ammoAmmount: 194146
+  ammoAmmount: 191418
   ammoSprite: {fileID: 0}
+  audios:
+  - {fileID: 8300000, guid: 1d7b79aa04c0a1c46952381a6e7555a3, type: 3}
+  - {fileID: 8300000, guid: 4934c74eb4a70ac47a6f6792bd5ca88a, type: 3}
+  - {fileID: 8300000, guid: f7d473d60efa36446bad809645a12a98, type: 3}
+  - {fileID: 8300000, guid: d1443b9f23cb7f8448f31b4521a33683, type: 3}
+  - {fileID: 8300000, guid: 078f53da985ed1240b91b2cae951f692, type: 3}
+  - {fileID: 8300000, guid: 86709df8411b585439891156a9e86adb, type: 3}
+  audioDensity: 0.8
   bulletPrefab: {fileID: 5675527454140333540, guid: 4468a16aefd8fb74d81073cd816129a8,
     type: 3}
   bulletAmmount: 1

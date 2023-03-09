@@ -18,12 +18,14 @@ public class PlayerMove : MonoBehaviour
     public ParticleSystem slideParticle;
     public ParticleSystem landParticle;
     public Transform graphics;
+    public AudioClip jumpClip;
 
     private InputManager inputManager;
     public Collider coll;
     private Rigidbody rb;
     private Animator anim;
     private SaveManager saveManager;
+    private AudioSource audioSource;
     private float earlyJumpTimer;
     private bool hasJumped = false;
     private bool isSliding;
@@ -41,6 +43,7 @@ public class PlayerMove : MonoBehaviour
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
         inputManager = GetComponent<InputManager>();
+        audioSource = GetComponentInChildren<AudioSource>();
         saveManager = FindObjectOfType<SaveManager>();
         pauseMenu = FindObjectOfType<PauseMenu>();
         graphicRotation = graphics.localEulerAngles;
@@ -185,6 +188,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (hasJumped) { return; }
 
+        landParticle.Play();
+        audioSource.PlayOneShot(jumpClip);
         impulseSource.GenerateImpulse(jumpImpulse);
         hasJumped = true;
         Vector3 vel = rb.velocity;
