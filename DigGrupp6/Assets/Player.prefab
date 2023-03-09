@@ -10634,8 +10634,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 10
   crouchSpeed: 5
-  jumpForce: 600
-  jumpImpulse: {x: 0, y: 0.15, z: 0}
+  jumpForce: 700
+  jumpImpulse: {x: 0, y: 0.18, z: 0}
   earlyJumpDuration: 0.2
   accelerationTime: 8
   deAccelerationTime: 12
@@ -10683,7 +10683,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7674614574123554187}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d4f50dc631f1fe6479ee5855ef140e12, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

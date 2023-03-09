@@ -21,10 +21,10 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.313
+    m_Value: 0.174
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.241
+    m_Value: 0.774
   rounded:
     m_OverrideState: 1
     m_Value: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
     m_Value: 5
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 0.9728255, g: 0.94716984, b: 1, a: 1}
+    m_Value: {r: 1, g: 0.93773586, b: 0.99245286, a: 1}
   hueShift:
     m_OverrideState: 1
     m_Value: 0

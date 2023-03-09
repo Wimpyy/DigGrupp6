@@ -31,7 +31,6 @@ public class EnemyHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            
             StartCoroutine(GetHit(currentAmmo.knockback, currentAmmo.damage));
         }
     }

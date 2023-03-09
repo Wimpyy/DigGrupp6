@@ -87,6 +87,8 @@ public class PlayerMove : MonoBehaviour
             hasLanded = false;
         }
 
+        anim.SetBool("InAir", !IsOnGround());
+
         Move();
     }
 
