@@ -6,8 +6,13 @@ public class HealthPickup : MonoBehaviour
 {
     public int healthGainValue = 5;
 
-    private void OnCollisionEnter(Collision collision)
+    public YoinkerScript yoinker;
+
+    private void Start()
     {
-        FindObjectOfType<PlayerLifeSupport>().GainHealth(healthGainValue);
+        yoinker = FindObjectOfType<YoinkerScript>();
+
     }
+
+    
 }
