@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour, Controls.IPlayerActions
 
     public event Action JumpEvent;
     public event Action ShootEvent;
+    public event Action PauseEvent;
     private Controls controls;
 
     void Start()
@@ -36,6 +37,11 @@ public class InputManager : MonoBehaviour, Controls.IPlayerActions
     public void OnShoot(InputAction.CallbackContext context)
     {
         ShootEvent?.Invoke();
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        PauseEvent?.Invoke();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

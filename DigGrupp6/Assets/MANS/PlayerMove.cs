@@ -35,12 +35,14 @@ public class PlayerMove : MonoBehaviour
     private Vector3 graphicRotation;
     private int touchedBushCount;
     private CinemachineImpulseSource impulseSource;
+    private PauseMenu pauseMenu;
 
     void Start()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
         inputManager = GetComponent<InputManager>();
         saveManager = FindObjectOfType<SaveManager>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
         graphicRotation = graphics.localEulerAngles;
         rb = GetComponent<Rigidbody>();
         anim = graphics.gameObject.GetComponent<Animator>();
@@ -55,6 +57,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (pauseMenu.IsPaused()) { return; }
+
         if (touchedBushCount >= 1)
         {
             isHidden = true;
