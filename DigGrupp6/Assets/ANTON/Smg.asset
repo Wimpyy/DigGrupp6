@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmmoName: Machine Gun
   gunType: 3
-  ammoAmmount: 9881
+  ammoAmmount: 9753
   ammoSprite: {fileID: 0}
+  audios:
+  - {fileID: 8300000, guid: 5c21eb2d85d746544814f232c3c44111, type: 3}
+  - {fileID: 8300000, guid: 6a98eb1484dc0b14fa775c4d239448ae, type: 3}
+  - {fileID: 8300000, guid: 3d947afcb8086324d93b6fb287c260be, type: 3}
+  audioDensity: 1
   bulletPrefab: {fileID: 5675527454140333540, guid: 5cf9b178005c0684f8c40403301f0e78,
     type: 3}
   bulletAmmount: 1

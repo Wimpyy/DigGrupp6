@@ -18,10 +18,11 @@ public class PlayerShoot : MonoBehaviour
 
     float baseFov;
     GameObject baseFollowTarget;
-
+    AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = transform.parent.GetComponentInChildren<AudioSource>();
         gunClass = FindObjectOfType<GunClass>();
 
         baseFov = cam.m_Lens.FieldOfView;
@@ -82,6 +83,11 @@ public class PlayerShoot : MonoBehaviour
         {
             if (activeAmmo.ammoAmmount > 0)
             {
+                if (Random.value <= activeAmmo.audioDensity)
+                {
+                    audioSource.PlayOneShot(activeAmmo.audios[Random.Range(0, activeAmmo.audios.Length)]);
+                }
+
                 gunClass.activeAmmo.RemoveAmmo(1);
                 fireRateTimer = 0;
                 GameObject bullet = Instantiate(activeAmmo.bulletPrefab, shootPoint.transform.position, Quaternion.identity);

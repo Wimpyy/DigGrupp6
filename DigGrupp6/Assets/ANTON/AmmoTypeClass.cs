@@ -18,6 +18,8 @@ public class AmmoTypeClass : ScriptableObject
     public GunType gunType;
     public int ammoAmmount;
     public Sprite ammoSprite;
+    public AudioClip[] audios;
+    public float audioDensity;
 
     public GameObject bulletPrefab;
     public int bulletAmmount;
