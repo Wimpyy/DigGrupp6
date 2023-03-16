@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class PlayerMove : MonoBehaviour
     public bool IsHidden { get { return isHidden; } }
     private float slidedTime;
     private float slideDirection;
+    public float xForceTimer;
+    private float xWalkVelocity;
     private Vector3 graphicRotation;
     private int touchedBushCount;
     private CinemachineImpulseSource impulseSource;
@@ -60,6 +63,11 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (!IsOnGround())
+        {
+            xForceTimer -= Time.deltaTime;
+        }
+
         if (pauseMenu.IsPaused()) { return; }
 
         if (touchedBushCount >= 1)
@@ -82,6 +90,7 @@ public class PlayerMove : MonoBehaviour
         if (IsOnGround() && !hasLanded)
         {
             impulseSource.GenerateImpulse(jumpImpulse);
+            xForceTimer = 0;
             landParticle.Play();
             hasLanded = true;
         }
@@ -168,7 +177,15 @@ public class PlayerMove : MonoBehaviour
     {
         Vector3 velocity = rb.velocity;
         velocity.z = 0;
+
+        if (xForceTimer > 0)
+        {
+            acc *= Mathf.Pow(1.5f, -xForceTimer);
+        }
+
         velocity.x = Mathf.Lerp(velocity.x, newVelocity, acc * Time.deltaTime);
+        //xForceVelocity -= Mathf.Sign(xForceVelocity) * Mathf.Abs(xForceVelocity * 2) * Time.deltaTime;
+
         rb.velocity = velocity;
     }
 
@@ -198,6 +215,15 @@ public class PlayerMove : MonoBehaviour
         rb.AddForce(new Vector3(0, jumpForce, 0));
     }
 
+    public void AddForceX(float xForce)
+    {
+        if (xForce != 0)
+        {
+            xForceTimer = Sqrt((int)Mathf.Abs(xForce) / 2);
+            print(xForceTimer);
+        }
+    }
+
     bool IsOnGround()
     {
         Vector3 extents = coll.bounds.size;
@@ -225,4 +251,17 @@ public class PlayerMove : MonoBehaviour
             touchedBushCount--;
         }
     }
+
+    public int Sqrt(int a)
+    {
+        int x = a / 2;
+        x = x / 2 + a / (2 * x);
+        x = x / 2 + a / (2 * x);
+        x = x / 2 + a / (2 * x);
+        x = x / 2 + a / (2 * x);
+        x = x / 2 + a / (2 * x);
+        return x;
+    }
 }
+
+

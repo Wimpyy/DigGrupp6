@@ -6,7 +6,8 @@ using static UnityEngine.ParticleSystem;
 public class Bounce : MonoBehaviour
 {
     public float bounceForce;
-    private Rigidbody rb;
+    private Rigidbody playerRb;
+    private PlayerMove playerMove;
     private ParticleSystem particle;
     private AudioSource aS;
     [SerializeField] Animator anim;
@@ -14,7 +15,8 @@ public class Bounce : MonoBehaviour
     void Start()
     {
         aS = GetComponent<AudioSource>();
-        rb = FindObjectOfType<PlayerMove>().GetComponent<Rigidbody>();
+        playerMove = FindObjectOfType<PlayerMove>();
+        playerRb = playerMove.GetComponent<Rigidbody>();
         particle = transform.parent.GetComponentInChildren<ParticleSystem>();
     }
 
@@ -26,7 +28,8 @@ public class Bounce : MonoBehaviour
             particle.Play();
             anim.SetTrigger("Bounce");
             Vector3 forceInput = transform.up;
-            rb.AddForce(bounceForce * forceInput);
+            playerRb.AddForce(bounceForce * forceInput);
+            playerMove.AddForceX(bounceForce * forceInput.x);
         }
     }
 }
