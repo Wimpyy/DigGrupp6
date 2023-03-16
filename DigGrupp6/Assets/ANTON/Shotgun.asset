@@ -16,6 +16,9 @@ MonoBehaviour:
   gunType: 2
   ammoAmmount: 880
   ammoSprite: {fileID: 0}
+  audios:
+  - {fileID: 8300000, guid: 6ce909c552a32aa44b0ae8a36366df3d, type: 3}
+  audioDensity: 1
   bulletPrefab: {fileID: 5675527454140333540, guid: d8a80d9dc91cbaa47a764698013d695e,
     type: 3}
   bulletAmmount: 5
