@@ -10,7 +10,7 @@ public class HealthPickup : MonoBehaviour
 
     public int healthPerParticle = 1;
 
-    float particleCounter = 0;
+    [SerializeField] float particleCounter = 0;
     float particleCountPP = 0.01f;
 
     private void Start()
